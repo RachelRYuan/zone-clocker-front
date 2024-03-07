@@ -76,7 +76,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         id_zone: response.data.id_zone || null,
       };
     } else {
-      response = await makeRequest.post("/auth/login", credentials);
+      response = await makeRequest.post("/auth/loginn", credentials);
       // response = await axios.post(
       //   "https://zone-clocker-back.onrender.com/api/auth/login",
       //   credentials
