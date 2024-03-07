@@ -3,6 +3,7 @@ import { makeRequest } from "../../axios";
 
 interface Account {
   name: string;
+  company_name: string;
   email: string;
   password: string;
   id_admin?: number;
@@ -12,6 +13,7 @@ interface Account {
 interface AccountState {
   accountList: Account[];
   name: string;
+  company_name: string;
   email: string;
   password: string;
   isVisibleCreateAccount: boolean;
@@ -23,6 +25,7 @@ interface AccountState {
 const initialState: AccountState = {
   accountList: [],
   name: "",
+  company_name: "",
   email: "",
   password: "",
   id_admin: 0,
@@ -33,7 +36,6 @@ const initialState: AccountState = {
 
 export const fetchAccounts = createAsyncThunk("addEmployee/fetchAccounts", async () => {
   const response = await makeRequest.get("/account/get-accounts");
-
   return response.data;
 });
 
@@ -49,6 +51,7 @@ const accountSlice = createSlice({
     },
     setFormInputs: (state, action: PayloadAction<Account>) => {
       state.name = action.payload.name ?? state.name;
+      state.company_name = action.payload.company_name ?? state.company_name;
       state.email = action.payload.email ?? state.email;
       state.password = action.payload.password ?? state.password;
       state.id_admin = action.payload.id_admin ?? state.id_admin;

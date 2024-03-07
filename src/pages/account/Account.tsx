@@ -30,8 +30,7 @@ export default function Account() {
       <hr className="h-px mb-4 bg-gray-200 border-0" />
       <TableOfAccounts />
       <p className="text-xs mt-4">
-        Do you want to delete an admin account? Send email to:
-        supportzoneclocker@gmail.com
+        Do you want to delete an admin account? Send email to: example@gmail.com
       </p>
       <ToastContainer />
       {isVisibleCreateAccount && <ModalCreateAccount />}
