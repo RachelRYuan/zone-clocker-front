@@ -43,6 +43,7 @@ function TableBodyRow({ account }: TBodyRowProps) {
                   password: "",
                   id_admin: account.id_admin,
                   id_company: account.id_company,
+                  company_name: "",
                 })
               );
             }}
