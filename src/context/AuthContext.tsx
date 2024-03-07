@@ -78,8 +78,13 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       };
     } else {
       // response = await makeRequest.post("/auth/login", credentials);
-      response = await axios.post("https://zone-clocker-back.onrender.com/api/auth/login", credentials);
+      response = await axios.post(
+        "https://zone-clocker-back.onrender.com/api/auth/login",
+        credentials
+      );
       role = "admin";
+
+      console.log(credentials);
 
       userData = {
         id: response.data.id_admin,
