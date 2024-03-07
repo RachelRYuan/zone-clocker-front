@@ -16,7 +16,7 @@ export function CreateAccount() {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:8800/api/auth/create-account", {
+      await axios.post("https://zone-clocker-back.onrender.com/api/auth/create-account", {
         name: name,
         email: email,
         password: password,
