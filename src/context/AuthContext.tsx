@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect, ReactNode } from "react";
 import { makeRequest } from "../axios";
-import axios from "axios";
 
 export const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
