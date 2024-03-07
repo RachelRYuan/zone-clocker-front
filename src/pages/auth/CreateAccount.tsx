@@ -14,7 +14,6 @@ export function CreateAccount() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     try {
       await axios.post("https://zone-clocker-back.onrender.com/api/auth/create-account", {
         name: name,
