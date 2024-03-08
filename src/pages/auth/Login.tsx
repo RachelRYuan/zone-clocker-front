@@ -9,7 +9,6 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
-  Checkbox,
   Input,
   Link,
 } from "@nextui-org/react";
@@ -67,7 +66,6 @@ export function Login() {
           <ModalContent>
             {(onClose) => (
               <>
-                {" "}
                 <form onSubmit={handleSubmit}>
                   <ModalHeader className="flex flex-col gap-1">Log in</ModalHeader>
                   <ModalBody>
@@ -101,13 +99,7 @@ export function Login() {
                       onChange={handleChange}
                     />
                     <div className="flex py-2 px-1 justify-between">
-                      <Checkbox
-                        classNames={{
-                          label: "text-small",
-                        }}
-                      >
-                        Remember me
-                      </Checkbox>
+                      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
                       <Link color="primary" href="#" size="sm">
                         Forgot password?
                       </Link>
@@ -117,7 +109,7 @@ export function Login() {
                     <Button color="danger" variant="flat" onPress={onClose}>
                       Close
                     </Button>
-                    <Button color="primary" onPress={onClose} type="submit">
+                    <Button color="primary" type="submit">
                       Sign in
                     </Button>
                   </ModalFooter>
