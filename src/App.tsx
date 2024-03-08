@@ -9,7 +9,6 @@ import AddNewZone from "./pages/employees/addNewZone/AddNewZone";
 import AddShift from "./pages/employees/addShift/AddShift";
 import Account from "./pages/account/Account";
 import { Login } from "./pages/auth/Login";
-import { LoginEmployee } from "./pages/auth/LoginEmployee";
 import { CreateAccount } from "./pages/auth/CreateAccount";
 import AuthProvider, { AuthContext } from "./context/AuthContext";
 import EmployeePage from "./pages/employeePage/EmployeePage";
@@ -45,7 +44,6 @@ const App: FC = () => {
         <Routes>
           {/* Public Routes */}
           <Route path="/login" element={<Login />} />
-          <Route path="/login-employee" element={<LoginEmployee />} />
           <Route path="/create-account" element={<CreateAccount />} />
 
           {/* Admin Routes */}

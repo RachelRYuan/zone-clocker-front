@@ -10,7 +10,6 @@ import {
   Button,
   useDisclosure,
   Input,
-  Link,
 } from "@nextui-org/react";
 import { MailIcon } from "./MailIcon.tsx";
 import { LockIcon } from "./LockIcon.jsx";
@@ -98,9 +97,6 @@ export default function LoginAdminModal() {
                   />
                   <div className="flex py-2 px-1 justify-between">
                     {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-                    <Link color="primary" href="#" size="sm">
-                      Forgot password?
-                    </Link>
                   </div>
                 </ModalBody>
                 <ModalFooter>

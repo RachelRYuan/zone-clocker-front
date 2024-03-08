@@ -1,5 +1,6 @@
 import LoginEmployeeModal from "./LoginEmployeeModal";
 import LoginAdminModal from "./LoginAdminModal";
+import { Link } from "react-router-dom";
 
 export function Login() {
   return (
@@ -10,9 +11,14 @@ export function Login() {
           Zone Clocker
         </h1>
         <div className=" flex flex-row gap-4 align-middle justify-center">
-          <LoginEmployeeModal />
           <LoginAdminModal />
+          <LoginEmployeeModal />
         </div>
+        <Link to="/create-account">
+          <p className="text-blue-900 underline cursor-pointer text-center mt-4">
+            Create an account
+          </p>
+        </Link>
       </div>
     </div>
   );
