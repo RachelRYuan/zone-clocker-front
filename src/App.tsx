@@ -55,7 +55,7 @@ const App: FC = () => {
               </ProtectedRoute>
             }
           >
-            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="list-of-employees" element={<ListOfEmployees />} />
             <Route path="add-employee" element={<AddEmployee />} />
             <Route path="edit-employee" element={<AddEmployee />} />

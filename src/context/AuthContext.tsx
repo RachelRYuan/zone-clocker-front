@@ -66,8 +66,6 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     let userData;
 
     if ("id_number" in credentials) {
-      console.log(credentials);
-
       response = await makeRequest.post("/auth/login-employee", credentials);
       role = "employee";
       userData = {
@@ -79,6 +77,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       };
     } else {
       console.log("Prueba");
+      console.log("credentials", credentials);
 
       response = await makeRequest.post("/auth/login", credentials);
       role = "admin";

@@ -45,7 +45,7 @@ export default function LoginAdminModal() {
 
     try {
       await login(formDataAdmin);
-      navigate("/");
+      navigate("/home");
     } catch (err: unknown) {
       if (err instanceof Error) {
         setErrorMessage("Login failed");
