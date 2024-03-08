@@ -66,6 +66,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     let userData;
 
     if ("id_number" in credentials) {
+      console.log(credentials);
+
       response = await makeRequest.post("/auth/login-employee", credentials);
       role = "employee";
       userData = {
@@ -79,10 +81,6 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       console.log("Prueba");
 
       response = await makeRequest.post("/auth/login", credentials);
-      // response = await axios.post(
-      //   "https://zone-clocker-back.onrender.com/api/auth/login",
-      //   credentials
-      // );
       role = "admin";
 
       userData = {

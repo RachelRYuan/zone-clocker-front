@@ -26,21 +26,23 @@ export default function LoginEmployeeModal() {
   const handleChangeEmployee = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormDataEmployee((prevData) => ({ ...prevData, [name]: value }));
+    console.log(formDataEmployee);
   };
 
-  const [formDataEmployee, setFormDataEmployee] = useState<{ id_number: number | "" }>({
+  const [formDataEmployee, setFormDataEmployee] = useState<{ id_number: "" }>({
     id_number: "",
   });
 
-  // const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmitEmployee = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // if (formDataEmployee.id_number === 0) {
-    //   setErrorMessage("Please enter your ID");
-    // } else {
-    //   setErrorMessage(null);
-    // }
+
+    if (formDataEmployee.id_number === "") {
+      setErrorMessage("Please enter your ID");
+    } else {
+      setErrorMessage(null);
+    }
 
     try {
       await login(formDataEmployee);
@@ -72,7 +74,9 @@ export default function LoginEmployeeModal() {
                     value={formDataEmployee.id_number}
                   />
                 </ModalBody>
+
                 <ModalFooter>
+                  {errorMessage && <p className="text-red-500">{errorMessage}</p>}
                   <Button color="danger" variant="flat" onPress={onClose}>
                     Close
                   </Button>
