@@ -1,8 +1,24 @@
 import { FormEvent, useState, useContext, ChangeEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+  Checkbox,
+  Input,
+  Link,
+} from "@nextui-org/react";
+import { MailIcon } from "./MailIcon.tsx";
+import { LockIcon } from "./LockIcon.jsx";
 
 export function Login() {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const [formData, setFormData] = useState<{ email: string; password: string }>({
     email: "",
     password: "",
@@ -25,6 +41,7 @@ export function Login() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("hu");
 
     try {
       await login(formData);
@@ -43,55 +60,72 @@ export function Login() {
         <h1 className="pb-4 text-3xl text-center font-bold text-orange-600 block">
           Zone Clocker
         </h1>
-        <form onSubmit={handleSubmit} className="p-2">
-          <div className="mb-4 flex flex-col items-start">
-            <label
-              htmlFor="email"
-              className="block sm:text-sm text-xs text-left my-auto mr-2 font-medium text-gray-600 sm:w-[40%]"
-            >
-              Email
-            </label>
-            <input
-              required
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="mt-1 py-3 px-2 border rounded-md text-xs w-[100%] focus:outline-none"
-            />
-          </div>
-          <div className="mb-4 flex flex-col items-start">
-            <label
-              htmlFor="password"
-              className="block sm:text-sm text-xs text-left my-auto mr-2 font-medium text-gray-600 sm:w-[40%]"
-            >
-              Password
-            </label>
-            <input
-              required
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="mt-1 py-3 px-2 border rounded-md text-xs w-[100%] focus:outline-none"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full uppercase text-center py-3 px-2 mb-4 bg-orange-600 text-white text-sm font-normal rounded"
-          >
-            Login
-          </button>
-          {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-
-          <div className="flex items-end justify-end">
-            <Link to="/create-account">
-              <p className="text-blue-900 underline cursor-pointer">Create an account</p>
-            </Link>
-          </div>
-        </form>
+        <Button onPress={onOpen} color="primary">
+          Open Modal
+        </Button>
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
+          <ModalContent>
+            {(onClose) => (
+              <>
+                {" "}
+                <form onSubmit={handleSubmit}>
+                  <ModalHeader className="flex flex-col gap-1">Log in</ModalHeader>
+                  <ModalBody>
+                    <Input
+                      autoFocus
+                      endContent={
+                        <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                      }
+                      label="Email"
+                      placeholder="Enter your email"
+                      variant="bordered"
+                      required
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
+                    <Input
+                      endContent={
+                        <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                      }
+                      label="Password"
+                      placeholder="Enter your password"
+                      type="password"
+                      variant="bordered"
+                      required
+                      id="password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                    />
+                    <div className="flex py-2 px-1 justify-between">
+                      <Checkbox
+                        classNames={{
+                          label: "text-small",
+                        }}
+                      >
+                        Remember me
+                      </Checkbox>
+                      <Link color="primary" href="#" size="sm">
+                        Forgot password?
+                      </Link>
+                    </div>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="danger" variant="flat" onPress={onClose}>
+                      Close
+                    </Button>
+                    <Button color="primary" onPress={onClose} type="submit">
+                      Sign in
+                    </Button>
+                  </ModalFooter>
+                </form>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
       </div>
     </div>
   );
