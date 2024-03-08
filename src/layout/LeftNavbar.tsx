@@ -39,7 +39,7 @@ const LeftNavbar = () => {
   const { logout } = authContext;
 
   const menus: Menu[] = [
-    { name: "Home", link: "/", icon: AiOutlineHome },
+    { name: "Home", link: "/home", icon: AiOutlineHome },
     { name: "Employees", icon: FaPeopleGroup },
     { name: "Account", link: "/account", icon: RiAccountCircleLine },
     { name: "Logout", link: "/", icon: SlLogout },
