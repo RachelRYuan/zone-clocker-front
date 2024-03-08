@@ -48,7 +48,7 @@ const App: FC = () => {
 
           {/* Admin Routes */}
           <Route
-            path="/"
+            path="admin"
             element={
               <ProtectedRoute allowedRoles={["admin"]}>
                 <Layout />
