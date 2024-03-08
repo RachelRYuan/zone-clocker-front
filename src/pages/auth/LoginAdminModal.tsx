@@ -59,12 +59,17 @@ export default function LoginAdminModal() {
         Admin
       </Button>
 
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        placement="center"
+        className="w-fit"
+      >
         <ModalContent>
           {(onClose) => (
             <>
               <form onSubmit={handleSubmit}>
-                <ModalHeader className="flex flex-col gap-1">Log in</ModalHeader>
+                <ModalHeader className="flex flex-col gap-1">Admin log in</ModalHeader>
                 <ModalBody>
                   <Input
                     autoFocus
@@ -103,7 +108,7 @@ export default function LoginAdminModal() {
                   <Button color="danger" variant="flat" onPress={onClose}>
                     Close
                   </Button>
-                  <Button color="primary" type="submit">
+                  <Button color="primary" type="submit" className="bg-orange-600">
                     Sign in
                   </Button>
                 </ModalFooter>

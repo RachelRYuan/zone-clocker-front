@@ -23,11 +23,7 @@ const ProtectedRoute: React.FC<{ children: ReactNode; allowedRoles: string[] }> 
     throw new Error("useAuth must be used within an AuthProvider");
   }
 
-  const { currentUser, loading, userRole } = authContext;
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const { currentUser, userRole } = authContext;
 
   // we check if the user is logged in and if the user role is allowed in all
   // the protected routes and "first match wins", It does not stop evaluating of fail conditions

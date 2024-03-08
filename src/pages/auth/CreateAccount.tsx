@@ -1,7 +1,16 @@
 import { FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
 import axios, { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
+import {
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Input,
+  Modal,
+  ModalContent,
+  useDisclosure,
+} from "@nextui-org/react";
 
 export function CreateAccount() {
   const [email, setEmail] = useState<string>("");
@@ -11,6 +20,9 @@ export function CreateAccount() {
   const [name, setName] = useState<string>("");
 
   const navigate = useNavigate();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,19 +38,111 @@ export function CreateAccount() {
     } catch (err: unknown) {
       if (err instanceof Error) {
         const axiosError = err as AxiosError;
+        setErrorMessage("Login failed");
+
         console.log(axiosError.response);
       }
     }
   };
 
   return (
-    <div className="sm:relative flex items-center justify-center w-full min-h-screen">
-      <div className="sm:absolute top-[5%] px-5 sm:py-8 py-4 m-4 bg-white max-w-[500px] w-[90%] border shadow-xl rounded">
-        {/* Title */}
-        <h1 className="pb-4 text-3xl text-center font-bold text-orange-600 block">
-          Zone Clocker
-        </h1>
-        <form onSubmit={handleSubmit} className="p-2">
+    <>
+      <p
+        className="text-blue-900 underline cursor-pointer text-center mt-4"
+        onClick={onOpen}
+      >
+        Create an account
+      </p>
+
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        placement="center"
+        className="w-fit"
+      >
+        <ModalContent>
+          {(onClose) => (
+            <form onSubmit={handleSubmit}>
+              <ModalHeader className="flex flex-col gap-1">
+                Create admin account
+              </ModalHeader>
+              <ModalBody>
+                <Input
+                  autoFocus
+                  label="Company name"
+                  placeholder="Enter company name"
+                  variant="bordered"
+                  required
+                  type="text"
+                  id="company_name"
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                />
+                <Input
+                  autoFocus
+                  label="Company email"
+                  placeholder="Enter company email"
+                  variant="bordered"
+                  required
+                  type="email"
+                  id="company_email"
+                  value={companyEmail}
+                  onChange={(e) => setCompanyEmail(e.target.value)}
+                />
+                <Input
+                  autoFocus
+                  label="Your name"
+                  placeholder="Enter your name"
+                  variant="bordered"
+                  required
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <Input
+                  autoFocus
+                  label="Your email"
+                  placeholder="Enter your email"
+                  variant="bordered"
+                  required
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+
+                <Input
+                  label="Password"
+                  placeholder="Enter your password"
+                  variant="bordered"
+                  required
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <div className="flex py-2 px-1 justify-between">
+                  {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+                </div>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="flat" onPress={onClose}>
+                  Close
+                </Button>
+                <Button color="primary" type="submit" className="bg-orange-600">
+                  Create account
+                </Button>
+              </ModalFooter>
+            </form>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+}
+{
+  /* <form onSubmit={handleSubmit} className="p-2">
           <div className="mb-4 flex flex-col items-start">
             <label
               htmlFor="company_name"
@@ -131,8 +235,5 @@ export function CreateAccount() {
               <p className="text-blue-900 underline cursor-pointer">Login instead</p>
             </Link>
           </div>
-        </form>
-      </div>
-    </div>
-  );
+        </form> */
 }

@@ -15,7 +15,6 @@ interface AuthContextProps {
   currentUser: User | null;
   login: (credentials: Credentials) => Promise<void>;
   logout: () => Promise<void>;
-  loading: boolean;
   userRole: string;
 }
 
@@ -34,10 +33,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     localStorage.getItem("userRole") || ""
   );
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
     makeRequest
       .get("/auth/validate-jwt-on-refresh-page")
       .then((res) => {
@@ -54,9 +51,6 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       })
       .catch((error) => {
         console.log(error);
-      })
-      .finally(() => {
-        setLoading(false);
       });
   }, []);
 
@@ -105,7 +99,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ currentUser, login, logout, loading, userRole }}>
+    <AuthContext.Provider value={{ currentUser, login, logout, userRole }}>
       {children}
     </AuthContext.Provider>
   );

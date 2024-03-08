@@ -56,18 +56,25 @@ export default function LoginEmployeeModal() {
       <Button onPress={onOpen} className="bg-orange-600 text-white h-fit py-2">
         Employee
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        placement="center"
+        className="w-fit"
+      >
         <ModalContent>
           {(onClose) => (
             <>
               <form onSubmit={handleSubmitEmployee}>
-                <ModalHeader className="flex flex-col gap-1">Log in</ModalHeader>
+                <ModalHeader className="flex flex-col gap-1">Employee log in</ModalHeader>
                 <ModalBody>
                   <Input
                     endContent={
                       <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                     }
-                    type="text"
+                    label="ID Number"
+                    placeholder="Enter your ID number"
+                    type="password"
                     id="id_number"
                     name="id_number"
                     onChange={handleChangeEmployee}
@@ -80,7 +87,7 @@ export default function LoginEmployeeModal() {
                   <Button color="danger" variant="flat" onPress={onClose}>
                     Close
                   </Button>
-                  <Button color="primary" type="submit">
+                  <Button color="primary" type="submit" className="bg-orange-600">
                     Log in
                   </Button>
                 </ModalFooter>
