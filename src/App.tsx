@@ -43,7 +43,7 @@ const App: FC = () => {
       <BrowserRouter>
         <Routes>
           {/* Public Routes */}
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/create-account" element={<CreateAccount />} />
 
           {/* Admin Routes */}
