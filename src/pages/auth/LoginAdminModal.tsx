@@ -46,16 +46,24 @@ export default function LoginAdminModal() {
     try {
       await login(formDataAdmin);
       navigate("/home");
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setErrorMessage("Login failed");
-      }
+      setErrorMessage("");
+    } catch (err) {
+      setErrorMessage("Login failed");
+    } finally {
+      setFormDataAdmin({ email: "", password: "" });
     }
   };
 
   return (
     <>
-      <Button onPress={onOpen} className="bg-orange-600 text-white h-fit py-2">
+      <Button
+        onPress={() => {
+          onOpen();
+          setErrorMessage("");
+          setFormDataAdmin({ email: "", password: "" });
+        }}
+        className="bg-orange-600 text-white h-fit py-2"
+      >
         Admin
       </Button>
 
@@ -100,17 +108,31 @@ export default function LoginAdminModal() {
                     value={formDataAdmin.password}
                     onChange={handleChange}
                   />
-                  <div className="flex py-2 px-1 justify-between">
-                    {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-                  </div>
                 </ModalBody>
                 <ModalFooter>
-                  <Button color="danger" variant="flat" onPress={onClose}>
-                    Close
-                  </Button>
-                  <Button color="primary" type="submit" className="bg-orange-600">
-                    Sign in
-                  </Button>
+                  <div>
+                    <div className="flex gap-1">
+                      <Button
+                        color="danger"
+                        variant="flat"
+                        onPress={() => {
+                          onClose();
+                          setErrorMessage("");
+                          setFormDataAdmin({ email: "", password: "" });
+                        }}
+                      >
+                        Close
+                      </Button>
+                      <Button color="primary" type="submit" className="bg-orange-600">
+                        Sign in
+                      </Button>
+                    </div>
+                    {errorMessage && (
+                      <p className="text-red-500 text-right mt-2 text-sm">
+                        {errorMessage}
+                      </p>
+                    )}
+                  </div>
                 </ModalFooter>
               </form>
             </>

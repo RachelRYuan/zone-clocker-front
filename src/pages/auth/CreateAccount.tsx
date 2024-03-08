@@ -1,6 +1,5 @@
 import { FormEvent, useState } from "react";
-import axios, { AxiosError } from "axios";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   ModalHeader,
   ModalBody,
@@ -13,35 +12,51 @@ import {
 } from "@nextui-org/react";
 
 export function CreateAccount() {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [companyName, setCompanyName] = useState<string>("");
-  const [companyEmail, setCompanyEmail] = useState<string>("");
-  const [name, setName] = useState<string>("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    companyName: "",
+    companyEmail: "",
+    name: "",
+  });
 
-  const navigate = useNavigate();
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (
+      !formData.name ||
+      !formData.companyEmail ||
+      !formData.companyName ||
+      !formData.email ||
+      !formData.password
+    ) {
+      setErrorMessage("All inputs are required");
+      return;
+    }
+
     try {
       await axios.post("https://zone-clocker-back.onrender.com/api/auth/create-account", {
-        name: name,
-        email: email,
-        password: password,
-        company_email: companyEmail,
-        company_name: companyName,
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        company_email: formData.companyEmail,
+        company_name: formData.companyName,
       });
-      navigate("/");
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        const axiosError = err as AxiosError;
-        setErrorMessage("Login failed");
-
-        console.log(axiosError.response);
-      }
+    } catch (err) {
+      setErrorMessage("Login failed");
+      console.log(err);
     }
   };
 
@@ -49,7 +64,17 @@ export function CreateAccount() {
     <>
       <p
         className="text-blue-900 underline cursor-pointer text-center mt-4"
-        onClick={onOpen}
+        onClick={() => {
+          onOpen();
+          setErrorMessage("");
+          setFormData({
+            email: "",
+            password: "",
+            companyName: "",
+            companyEmail: "",
+            name: "",
+          });
+        }}
       >
         Create an account
       </p>
@@ -75,8 +100,8 @@ export function CreateAccount() {
                   required
                   type="text"
                   id="company_name"
-                  value={companyName}
-                  onChange={(e) => setCompanyName(e.target.value)}
+                  value={formData.name}
+                  onChange={handleChange}
                 />
                 <Input
                   autoFocus
@@ -86,8 +111,8 @@ export function CreateAccount() {
                   required
                   type="email"
                   id="company_email"
-                  value={companyEmail}
-                  onChange={(e) => setCompanyEmail(e.target.value)}
+                  value={formData.companyEmail}
+                  onChange={handleChange}
                 />
                 <Input
                   autoFocus
@@ -97,8 +122,8 @@ export function CreateAccount() {
                   required
                   type="text"
                   id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={formData.name}
+                  onChange={handleChange}
                 />
                 <Input
                   autoFocus
@@ -108,8 +133,8 @@ export function CreateAccount() {
                   required
                   type="email"
                   id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={formData.email}
+                  onChange={handleChange}
                 />
 
                 <Input
@@ -119,20 +144,38 @@ export function CreateAccount() {
                   required
                   type="password"
                   id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={formData.password}
+                  onChange={handleChange}
                 />
-                <div className="flex py-2 px-1 justify-between">
-                  {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-                </div>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="flat" onPress={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" type="submit" className="bg-orange-600">
-                  Create account
-                </Button>
+                <div>
+                  <div className="flex gap-1">
+                    <Button
+                      color="danger"
+                      variant="flat"
+                      onPress={() => {
+                        onClose();
+                        setErrorMessage("");
+                        setFormData({
+                          email: "",
+                          password: "",
+                          companyName: "",
+                          companyEmail: "",
+                          name: "",
+                        });
+                      }}
+                    >
+                      Close
+                    </Button>
+                    <Button color="primary" type="submit" className="bg-orange-600">
+                      Create account
+                    </Button>
+                  </div>
+                  {errorMessage && (
+                    <p className="text-red-500 text-right mt-2 text-sm">{errorMessage}</p>
+                  )}
+                </div>
               </ModalFooter>
             </form>
           )}
@@ -140,100 +183,4 @@ export function CreateAccount() {
       </Modal>
     </>
   );
-}
-{
-  /* <form onSubmit={handleSubmit} className="p-2">
-          <div className="mb-4 flex flex-col items-start">
-            <label
-              htmlFor="company_name"
-              className="block sm:text-sm text-xs text-left my-auto mr-2 font-medium text-gray-600 sm:w-[40%]"
-            >
-              Company Name
-            </label>
-            <input
-              required
-              type="text"
-              id="company_name"
-              value={companyName}
-              onChange={(e) => setCompanyName(e.target.value)}
-              className="mt-1 py-3 px-2 border rounded-md text-xs w-[100%] focus:outline-none"
-            />
-          </div>
-          <div className="mb-4 flex flex-col items-start">
-            <label
-              htmlFor="company_email"
-              className="block sm:text-sm text-xs text-left my-auto mr-2 font-medium text-gray-600 sm:w-[40%]"
-            >
-              Company Email
-            </label>
-            <input
-              required
-              type="email"
-              id="company_email"
-              value={companyEmail}
-              onChange={(e) => setCompanyEmail(e.target.value)}
-              className="mt-1 py-3 px-2 border rounded-md text-xs w-[100%] focus:outline-none"
-            />
-          </div>
-          <div className="mb-4 flex flex-col items-start">
-            <label
-              htmlFor="email"
-              className="block sm:text-sm text-xs text-left my-auto mr-2 font-medium text-gray-600 sm:w-[40%]"
-            >
-              Your Email
-            </label>
-            <input
-              required
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 py-3 px-2 border rounded-md text-xs w-[100%] focus:outline-none"
-            />
-          </div>
-          <div className="mb-4 flex flex-col items-start">
-            <label
-              htmlFor="name"
-              className="block sm:text-sm text-xs text-left my-auto mr-2 font-medium text-gray-600 sm:w-[40%]"
-            >
-              Your Name
-            </label>
-            <input
-              required
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="mt-1 py-3 px-2 border rounded-md text-xs w-[100%] focus:outline-none"
-            />
-          </div>
-          <div className="mb-4 flex flex-col items-start">
-            <label
-              htmlFor="password"
-              className="block sm:text-sm text-xs text-left my-auto mr-2 font-medium text-gray-600 sm:w-[40%]"
-            >
-              Password
-            </label>
-            <input
-              required
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 py-3 px-2 border rounded-md text-xs w-[100%] focus:outline-none"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full uppercase text-center py-3 px-2 mb-4 bg-orange-600 text-white text-sm font-normal rounded"
-          >
-            CREATE ACCOUNT
-          </button>
-
-          <div className="flex items-end justify-end">
-            <Link to="/login">
-              <p className="text-blue-900 underline cursor-pointer">Login instead</p>
-            </Link>
-          </div>
-        </form> */
 }

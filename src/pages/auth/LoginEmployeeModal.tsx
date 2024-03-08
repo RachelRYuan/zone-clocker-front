@@ -26,7 +26,6 @@ export default function LoginEmployeeModal() {
   const handleChangeEmployee = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormDataEmployee((prevData) => ({ ...prevData, [name]: value }));
-    console.log(formDataEmployee);
   };
 
   const [formDataEmployee, setFormDataEmployee] = useState<{ id_number: "" }>({
@@ -38,22 +37,32 @@ export default function LoginEmployeeModal() {
   const handleSubmitEmployee = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (formDataEmployee.id_number === "") {
+    if (!formDataEmployee.id_number) {
       setErrorMessage("Please enter your ID");
-    } else {
-      setErrorMessage(null);
+      return;
     }
 
     try {
       await login(formDataEmployee);
       navigate("/employee/home");
-    } catch (error) {
-      console.log(error);
+      setErrorMessage("");
+    } catch (err) {
+      setErrorMessage("Login failed");
+    } finally {
+      setFormDataEmployee({ id_number: "" });
     }
   };
+
   return (
     <>
-      <Button onPress={onOpen} className="bg-orange-600 text-white h-fit py-2">
+      <Button
+        onPress={() => {
+          onOpen();
+          setErrorMessage(null);
+          setFormDataEmployee({ id_number: "" });
+        }}
+        className="bg-orange-600 text-white h-fit py-2"
+      >
         Employee
       </Button>
       <Modal
@@ -83,13 +92,29 @@ export default function LoginEmployeeModal() {
                 </ModalBody>
 
                 <ModalFooter>
-                  {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-                  <Button color="danger" variant="flat" onPress={onClose}>
-                    Close
-                  </Button>
-                  <Button color="primary" type="submit" className="bg-orange-600">
-                    Log in
-                  </Button>
+                  <div>
+                    <div className="flex gap-1">
+                      <Button
+                        color="danger"
+                        variant="flat"
+                        onPress={() => {
+                          onClose();
+                          setErrorMessage("");
+                          setFormDataEmployee({ id_number: "" });
+                        }}
+                      >
+                        Close
+                      </Button>
+                      <Button color="primary" type="submit" className="bg-orange-600">
+                        Log in
+                      </Button>
+                    </div>
+                    {errorMessage && (
+                      <p className="text-red-500 text-right mt-2 text-sm">
+                        {errorMessage}
+                      </p>
+                    )}
+                  </div>
                 </ModalFooter>
               </form>
             </>
