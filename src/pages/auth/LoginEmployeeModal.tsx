@@ -69,7 +69,7 @@ export default function LoginEmployeeModal() {
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         placement="center"
-        className="w-fit"
+        className="w-fit sm:w-[600px]"
       >
         <ModalContent>
           {(onClose) => (

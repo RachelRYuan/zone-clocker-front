@@ -35,16 +35,16 @@ export function CreateAccount() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (
-      !formData.name ||
-      !formData.companyEmail ||
-      !formData.companyName ||
-      !formData.email ||
-      !formData.password
-    ) {
-      setErrorMessage("All inputs are required");
-      return;
-    }
+    // if (
+    //   !formData.name ||
+    //   !formData.companyEmail ||
+    //   !formData.companyName ||
+    //   !formData.email ||
+    //   !formData.password
+    // ) {
+    //   setErrorMessage("All inputs are required");
+    //   return;
+    // }
 
     try {
       await axios.post("https://zone-clocker-back.onrender.com/api/auth/create-account", {
@@ -83,7 +83,7 @@ export function CreateAccount() {
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         placement="center"
-        className="w-fit"
+        className="w-fit sm:w-[600px]"
       >
         <ModalContent>
           {(onClose) => (

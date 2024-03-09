@@ -43,6 +43,11 @@ export default function LoginAdminModal() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!formDataAdmin.email || !formDataAdmin.password) {
+      setErrorMessage("All inputs are required");
+      return;
+    }
+
     try {
       await login(formDataAdmin);
       navigate("/home");
@@ -71,7 +76,7 @@ export default function LoginAdminModal() {
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         placement="center"
-        className="w-fit"
+        className="w-fit sm:w-[600px]"
       >
         <ModalContent>
           {(onClose) => (
