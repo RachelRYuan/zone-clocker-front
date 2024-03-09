@@ -54,9 +54,11 @@ export function CreateAccount() {
         company_email: formData.companyEmail,
         company_name: formData.companyName,
       });
-    } catch (err) {
-      setErrorMessage("Login failed");
-      console.log(err);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setErrorMessage("Login failed");
+        console.log(err as Error);
+      }
     }
   };
 
