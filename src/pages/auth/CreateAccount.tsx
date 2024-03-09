@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import {
   ModalHeader,
   ModalBody,
@@ -56,8 +56,11 @@ export function CreateAccount() {
       });
     } catch (err: unknown) {
       setErrorMessage("Login failed");
-      if (err instanceof Error) {
-        console.log(err);
+      if (err instanceof AxiosError) {
+        console.log(err.response);
+        if (err.response?.data?.error) {
+          console.log(err.response?.data?.error);
+        }
       }
     }
   };
