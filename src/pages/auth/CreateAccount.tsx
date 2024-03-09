@@ -55,12 +55,8 @@ export function CreateAccount() {
         company_name: formData.companyName,
       });
     } catch (err: unknown) {
-      setErrorMessage("Login failed");
-      if (err instanceof AxiosError) {
-        console.log(err.response);
-        if (err.response?.data?.error) {
-          console.log(err.response?.data?.error);
-        }
+      if (err instanceof AxiosError && err.response?.data?.error) {
+        setErrorMessage(err.response?.data?.error);
       }
     }
   };

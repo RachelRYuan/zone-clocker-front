@@ -12,6 +12,7 @@ import {
   Input,
 } from "@nextui-org/react";
 import { LockIcon } from "./LockIcon.jsx";
+import { AxiosError } from "axios";
 
 export default function LoginEmployeeModal() {
   const navigate = useNavigate();
@@ -46,8 +47,10 @@ export default function LoginEmployeeModal() {
       await login(formDataEmployee);
       navigate("/employee/home");
       setErrorMessage("");
-    } catch (err) {
-      setErrorMessage("Login failed");
+    } catch (err: unknown) {
+      if (err instanceof AxiosError && err.response?.data?.error) {
+        setErrorMessage(err.response?.data?.error);
+      }
     } finally {
       setFormDataEmployee({ id_number: "" });
     }

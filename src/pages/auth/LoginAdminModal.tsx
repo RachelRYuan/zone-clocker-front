@@ -13,6 +13,7 @@ import {
 } from "@nextui-org/react";
 import { MailIcon } from "./MailIcon.tsx";
 import { LockIcon } from "./LockIcon.jsx";
+import { AxiosError } from "axios";
 
 export default function LoginAdminModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -52,8 +53,10 @@ export default function LoginAdminModal() {
       await login(formDataAdmin);
       navigate("/home");
       setErrorMessage("");
-    } catch (err) {
-      setErrorMessage("Login failed");
+    } catch (err: unknown) {
+      if (err instanceof AxiosError && err.response?.data?.error) {
+        setErrorMessage(err.response?.data?.error);
+      }
     } finally {
       setFormDataAdmin({ email: "", password: "" });
     }
