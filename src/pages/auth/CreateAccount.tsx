@@ -57,7 +57,7 @@ export function CreateAccount() {
     } catch (err: unknown) {
       setErrorMessage("Login failed");
       if (err instanceof Error) {
-        console.log(err.message);
+        console.log(err);
       }
     }
   };
