@@ -23,8 +23,6 @@ export function CreateAccount() {
   const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log("here", e.target.value);
-
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,

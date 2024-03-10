@@ -70,9 +70,6 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         id_zone: response.data.id_zone || null,
       };
     } else {
-      console.log("Prueba");
-      console.log("credentials", credentials);
-
       response = await makeRequest.post("/auth/login", credentials);
       role = "admin";
 
