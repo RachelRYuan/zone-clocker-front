@@ -197,7 +197,7 @@ export default function Form({ dropdownOpen, handleMenuClick }: FormProps) {
           </div>
         </>
       )}
-      <div className="flex flex-col">
+      <div className="flex flex-col mt-2">
         <div className="flex justify-end gap-2">
           <button
             onClick={() => dispatch(resetState())}
