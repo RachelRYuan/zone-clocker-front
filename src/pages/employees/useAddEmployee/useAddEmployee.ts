@@ -191,17 +191,7 @@ export const useEmployee = () => {
           id_zone,
         });
         employeeNotification("Employee added successfully");
-        setFormInputs({
-          name: "",
-          id_number: "",
-          is_active: true,
-          birthday: "",
-          mobile_number: "",
-          email: "",
-          zone: "",
-          id_employee: null,
-          id_zone: null,
-        });
+        dispatch(resetState());
       } catch (err: unknown) {
         if (err instanceof AxiosError && err.response?.data?.error) {
           setErrorMessage(err.response?.data?.error);
@@ -209,7 +199,7 @@ export const useEmployee = () => {
       }
     }
 
-    dispatch(resetState());
+    // dispatch(resetState());
   };
 
   return {
