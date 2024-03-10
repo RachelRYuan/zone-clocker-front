@@ -1,6 +1,6 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setFormInputs } from "../../../slices/employees/employeeSlice";
+import { resetState, setFormInputs } from "../../../slices/employees/employeeSlice";
 import { AppDispatch, RootState } from "../../../store/store";
 import { toggleModal } from "../../../slices/zones/modalSlice";
 import { toast } from "react-toastify";
@@ -163,6 +163,7 @@ export const useEmployee = () => {
           id_zone: null,
         });
         employeeNotification("Employee updated successfully");
+        dispatch(resetState());
       } else {
         await makeRequest.put(`/employee/update-employee/${id_employee}`, {
           name,
@@ -175,11 +176,11 @@ export const useEmployee = () => {
           id_zone,
         });
         employeeNotification("Employee updated successfully");
+        dispatch(resetState());
       }
     } else {
       try {
         setErrorMessage("");
-        console.log("inside try 1");
 
         await makeRequest.post("/employee/add-employee", {
           name,
@@ -191,21 +192,15 @@ export const useEmployee = () => {
           zone,
           id_zone,
         });
-        console.log("inside try 2");
 
         employeeNotification("Employee added successfully");
-        console.log("inside try 3");
-
-        // dispatch(resetState());
+        dispatch(resetState());
       } catch (err: unknown) {
         if (err instanceof AxiosError && err.response?.data?.error) {
           setErrorMessage(err.response?.data?.error);
-          console.log("Inside catch");
         }
       }
     }
-
-    // dispatch(resetState());
   };
 
   return {

@@ -237,7 +237,7 @@ export default function Form({ dropdownOpen, handleMenuClick }: FormProps) {
         </div>
         <div>
           {errorMessage && (
-            <p className="text-red-500 text-right mt-2 text-sm">{errorMessage}</p>
+            <p className="text-red-500 text-right mt-1 text-sm">{errorMessage}</p>
           )}
         </div>
       </div>
