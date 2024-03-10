@@ -148,7 +148,7 @@ export const useEmployee = () => {
       modify_email = email;
     }
 
-    //Update / Add employee
+    // Update / Add employee
     if (id_employee) {
       // Update employee when zone is null and when zone is not null
       if (id_zone === null) {
