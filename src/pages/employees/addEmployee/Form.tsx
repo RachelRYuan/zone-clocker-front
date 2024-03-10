@@ -197,44 +197,49 @@ export default function Form({ dropdownOpen, handleMenuClick }: FormProps) {
           </div>
         </>
       )}
-      <div className="flex justify-end gap-2">
-        <button
-          onClick={() => dispatch(resetState())}
-          type="button"
-          className="text-center sm:py-[0.5rem] sm:px-[1rem] py-[0.2rem] px-[0.5rem] bg-gray-500 text-white text-sm font-normal rounded"
-        >
-          Cancel
-        </button>
-        {formInputs.id_employee ? (
+      <div className="flex flex-col">
+        <div className="flex justify-end gap-2">
           <button
-            type="submit"
-            // if any of the errors exist, will return true, and the button will be disabled
-            disabled={!!nameError || !!idNumberError || !!mobileNumberError}
-            className={`text-center sm:py-[0.5rem] sm:px-[1rem] py-[0.2rem] px-[0.5rem] text-white text-sm font-normal rounded ${
-              !!nameError || !!idNumberError || !!mobileNumberError
-                ? "bg-gray-200"
-                : "bg-orange-600 hover:bg-orange-700"
-            }`}
+            onClick={() => dispatch(resetState())}
+            type="button"
+            className="text-center sm:py-[0.5rem] sm:px-[1rem] py-[0.2rem] px-[0.5rem] bg-gray-500 text-white text-sm font-normal rounded"
           >
-            Update
+            Cancel
           </button>
-        ) : (
-          <button
-            type="submit"
-            // if any of the errors exist, will return true, and the button will be disabled
-            disabled={!!nameError || !!idNumberError || !!mobileNumberError}
-            className={`text-center sm:py-[0.5rem] sm:px-[1rem] py-[0.2rem] px-[0.5rem] text-white text-sm font-normal rounded ${
-              !!nameError || !!idNumberError || !!mobileNumberError
-                ? "bg-gray-200"
-                : "bg-orange-600 hover:bg-orange-700"
-            }`}
-          >
-            Save
-          </button>
-        )}
-        {errorMessage && (
-          <p className="text-red-500 text-right mt-2 text-sm">{errorMessage}</p>
-        )}
+
+          {formInputs.id_employee ? (
+            <button
+              type="submit"
+              // if any of the errors exist, will return true, and the button will be disabled
+              disabled={!!nameError || !!idNumberError || !!mobileNumberError}
+              className={`text-center sm:py-[0.5rem] sm:px-[1rem] py-[0.2rem] px-[0.5rem] text-white text-sm font-normal rounded ${
+                !!nameError || !!idNumberError || !!mobileNumberError
+                  ? "bg-gray-200"
+                  : "bg-orange-600 hover:bg-orange-700"
+              }`}
+            >
+              Update
+            </button>
+          ) : (
+            <button
+              type="submit"
+              // if any of the errors exist, will return true, and the button will be disabled
+              disabled={!!nameError || !!idNumberError || !!mobileNumberError}
+              className={`text-center sm:py-[0.5rem] sm:px-[1rem] py-[0.2rem] px-[0.5rem] text-white text-sm font-normal rounded ${
+                !!nameError || !!idNumberError || !!mobileNumberError
+                  ? "bg-gray-200"
+                  : "bg-orange-600 hover:bg-orange-700"
+              }`}
+            >
+              Save
+            </button>
+          )}
+        </div>
+        <div>
+          {errorMessage && (
+            <p className="text-red-500 text-right mt-2 text-sm">{errorMessage}</p>
+          )}
+        </div>
       </div>
     </form>
   );
