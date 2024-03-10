@@ -87,6 +87,10 @@ export default function LoginAdminModal() {
               <form onSubmit={handleSubmit}>
                 <ModalHeader className="flex flex-col gap-1">Admin log in</ModalHeader>
                 <ModalBody>
+                  <p className="text-xs mt-[-21px]">
+                    Are you a curious guest? Use 'guest@gmail.com' as email and 'guest' as
+                    password
+                  </p>
                   <Input
                     autoFocus
                     endContent={

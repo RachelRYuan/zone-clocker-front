@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import axios, { AxiosError } from "axios";
 import {
   ModalHeader,
@@ -15,12 +15,14 @@ export function CreateAccount() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    companyName: "",
-    companyEmail: "",
+    company_name: "",
+    company_email: "",
     name: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log("here", e.target.value);
+
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -35,24 +37,13 @@ export function CreateAccount() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // if (
-    //   !formData.name ||
-    //   !formData.companyEmail ||
-    //   !formData.companyName ||
-    //   !formData.email ||
-    //   !formData.password
-    // ) {
-    //   setErrorMessage("All inputs are required");
-    //   return;
-    // }
-
     try {
       await axios.post("https://zone-clocker-back.onrender.com/api/auth/create-account", {
         name: formData.name,
         email: formData.email,
         password: formData.password,
-        company_email: formData.companyEmail,
-        company_name: formData.companyName,
+        company_email: formData.company_email,
+        company_name: formData.company_name,
       });
     } catch (err: unknown) {
       if (err instanceof AxiosError && err.response?.data?.error) {
@@ -71,8 +62,8 @@ export function CreateAccount() {
           setFormData({
             email: "",
             password: "",
-            companyName: "",
-            companyEmail: "",
+            company_name: "",
+            company_email: "",
             name: "",
           });
         }}
@@ -101,8 +92,9 @@ export function CreateAccount() {
                   required
                   type="text"
                   id="company_name"
-                  value={formData.name}
+                  name="company_name"
                   onChange={handleChange}
+                  value={formData.company_name}
                 />
                 <Input
                   autoFocus
@@ -112,7 +104,8 @@ export function CreateAccount() {
                   required
                   type="email"
                   id="company_email"
-                  value={formData.companyEmail}
+                  name="company_email"
+                  value={formData.company_email}
                   onChange={handleChange}
                 />
                 <Input
@@ -123,6 +116,7 @@ export function CreateAccount() {
                   required
                   type="text"
                   id="name"
+                  name="name"
                   value={formData.name}
                   onChange={handleChange}
                 />
@@ -134,6 +128,7 @@ export function CreateAccount() {
                   required
                   type="email"
                   id="email"
+                  name="email"
                   value={formData.email}
                   onChange={handleChange}
                 />
@@ -145,6 +140,7 @@ export function CreateAccount() {
                   required
                   type="password"
                   id="password"
+                  name="password"
                   value={formData.password}
                   onChange={handleChange}
                 />
@@ -161,8 +157,8 @@ export function CreateAccount() {
                         setFormData({
                           email: "",
                           password: "",
-                          companyName: "",
-                          companyEmail: "",
+                          company_name: "",
+                          company_email: "",
                           name: "",
                         });
                       }}
