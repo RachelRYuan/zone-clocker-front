@@ -179,6 +179,7 @@ export const useEmployee = () => {
     } else {
       try {
         setErrorMessage("");
+        console.log("inside try 1");
 
         await makeRequest.post("/employee/add-employee", {
           name,
@@ -190,11 +191,16 @@ export const useEmployee = () => {
           zone,
           id_zone,
         });
+        console.log("inside try 2");
+
         employeeNotification("Employee added successfully");
+        console.log("inside try 3");
+
         // dispatch(resetState());
       } catch (err: unknown) {
         if (err instanceof AxiosError && err.response?.data?.error) {
           setErrorMessage(err.response?.data?.error);
+          console.log("Inside catch");
         }
       }
     }
