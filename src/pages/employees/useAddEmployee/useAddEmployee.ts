@@ -178,6 +178,8 @@ export const useEmployee = () => {
       }
     } else {
       try {
+        setErrorMessage("");
+
         await makeRequest.post("/employee/add-employee", {
           name,
           id_number,
@@ -189,7 +191,6 @@ export const useEmployee = () => {
           id_zone,
         });
         employeeNotification("Employee added successfully");
-        setErrorMessage("");
         setFormInputs({
           name: "",
           id_number: "",
