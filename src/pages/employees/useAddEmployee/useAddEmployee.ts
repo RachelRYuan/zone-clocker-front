@@ -204,7 +204,6 @@ export const useEmployee = () => {
       } catch (err: unknown) {
         if (err instanceof AxiosError && err.response?.data?.error) {
           setErrorMessage(err.response?.data?.error);
-          console.log(err.response);
         }
       }
     }
