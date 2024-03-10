@@ -130,6 +130,18 @@ export const useEmployee = () => {
       id_zone,
     } = formInputs;
 
+    console.log(
+      name,
+      id_number,
+      is_active,
+      birthday,
+      mobile_number,
+      email,
+      zone,
+      id_employee,
+      id_zone
+    );
+
     let modify_birthday;
     let modify_email;
 

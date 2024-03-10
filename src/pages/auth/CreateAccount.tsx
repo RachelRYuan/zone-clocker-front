@@ -10,6 +10,7 @@ import {
   ModalContent,
   useDisclosure,
 } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 
 export function CreateAccount() {
   const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ export function CreateAccount() {
     company_email: "",
     name: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     console.log("here", e.target.value);
@@ -44,6 +46,14 @@ export function CreateAccount() {
         password: formData.password,
         company_email: formData.company_email,
         company_name: formData.company_name,
+      });
+      navigate("/home");
+      setFormData({
+        email: "",
+        password: "",
+        company_name: "",
+        company_email: "",
+        name: "",
       });
     } catch (err: unknown) {
       if (err instanceof AxiosError && err.response?.data?.error) {
