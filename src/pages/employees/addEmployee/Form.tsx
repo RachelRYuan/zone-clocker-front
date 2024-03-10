@@ -24,6 +24,7 @@ export default function Form({ dropdownOpen, handleMenuClick }: FormProps) {
   const {
     nameError,
     mobileNumberError,
+    errorMessage,
     idNumberError,
     handleNameChange,
     handleIdNumberChange,
@@ -230,6 +231,9 @@ export default function Form({ dropdownOpen, handleMenuClick }: FormProps) {
           >
             Save
           </button>
+        )}
+        {errorMessage && (
+          <p className="text-red-500 text-right mt-2 text-sm">{errorMessage}</p>
         )}
       </div>
     </form>

@@ -6,6 +6,7 @@ import { toggleModal } from "../../../slices/zones/modalSlice";
 import { toast } from "react-toastify";
 import { makeRequest } from "../../../axios";
 import { fetchEmployees } from "../../../slices/employees/employeeSlice";
+import { AxiosError } from "axios";
 
 export const useEmployee = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -17,6 +18,8 @@ export const useEmployee = () => {
   const employeeNotification = (message: string) => {
     toast(message);
   };
+
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const formInputs = useSelector((state: RootState) => state.employee);
   const { zoneList } = useSelector((state: RootState) => state.zones);
@@ -130,18 +133,6 @@ export const useEmployee = () => {
       id_zone,
     } = formInputs;
 
-    console.log(
-      name,
-      id_number,
-      is_active,
-      birthday,
-      mobile_number,
-      email,
-      zone,
-      id_employee,
-      id_zone
-    );
-
     let modify_birthday;
     let modify_email;
 
@@ -186,17 +177,35 @@ export const useEmployee = () => {
         employeeNotification("Employee updated successfully");
       }
     } else {
-      await makeRequest.post("/employee/add-employee", {
-        name,
-        id_number,
-        is_active,
-        birthday: modify_birthday,
-        mobile_number,
-        email: modify_email,
-        zone,
-        id_zone,
-      });
-      employeeNotification("Employee added successfully");
+      try {
+        await makeRequest.post("/employee/add-employee", {
+          name,
+          id_number,
+          is_active,
+          birthday: modify_birthday,
+          mobile_number,
+          email: modify_email,
+          zone,
+          id_zone,
+        });
+        employeeNotification("Employee added successfully");
+        setErrorMessage("");
+        setFormInputs({
+          name: "",
+          id_number: "",
+          is_active: true,
+          birthday: "",
+          mobile_number: "",
+          email: "",
+          zone: "",
+          id_employee: null,
+          id_zone: null,
+        });
+      } catch (err: unknown) {
+        if (err instanceof AxiosError && err.response?.data?.error) {
+          setErrorMessage(err.response?.data?.error);
+        }
+      }
     }
 
     dispatch(resetState());
@@ -212,5 +221,6 @@ export const useEmployee = () => {
     handleZoneChange,
     handleMobileNumberChange,
     handleDeleteEmployee,
+    errorMessage,
   };
 };
