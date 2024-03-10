@@ -1,6 +1,6 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { resetState, setFormInputs } from "../../../slices/employees/employeeSlice";
+import { setFormInputs } from "../../../slices/employees/employeeSlice";
 import { AppDispatch, RootState } from "../../../store/store";
 import { toggleModal } from "../../../slices/zones/modalSlice";
 import { toast } from "react-toastify";
@@ -191,7 +191,7 @@ export const useEmployee = () => {
           id_zone,
         });
         employeeNotification("Employee added successfully");
-        dispatch(resetState());
+        // dispatch(resetState());
       } catch (err: unknown) {
         if (err instanceof AxiosError && err.response?.data?.error) {
           setErrorMessage(err.response?.data?.error);
