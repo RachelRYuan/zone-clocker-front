@@ -1,27 +1,44 @@
-# React + TypeScript + Vite
+# Zone Clocker: Employee Schedule and Work Zone Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Platform**: Full Stack (Node.js, Express.js, React with Vite, TypeScript, MySQL)
 
-Currently, two official plugins are available:
+**Target Users**: Companies and Organizations
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Core Functionality
 
-## Expanding the ESLint configuration
+Zone Clocker full-stack application designed to streamline employee schedule management and work zone assignments for companies. It provides a centralized platform for admins to manage employee schedules and work zones, with a focus on time tracking and location-based check-ins and check-outs.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Key Features
 
-- Configure the top-level `parserOptions` property like this:
+1. **Company Account Creation**: Organizations can create their own accounts, serving as the administrative hub for managing employees and work zones.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+2. **Employee Management**: Admins can add employees by inputting essential details like name and ID number, with additional optional information.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+3. **Work Zone Creation and Assignment**:
+
+   - Admins can define work zones using a map interface, selecting specific areas and setting radio to mark designated workspaces.
+   - Employees are assigned to these zones, and their check-ins and check-outs are only valid when done within these designated areas.
+
+4. **Time Tracking and Calendar Integration**: Both employees and admins can track check-in and check-out times via an intuitive calendar interface.
+
+5. **Scheduling and Real-time Updates**: Admins can set schedules for each employee and receive real-time updates on employee check-ins and checkouts.
+
+6. **Employee Editing and Searching**: Admins have the capability to edit, create, and delete employee records. They can also search for employees or work zones by name.
+
+7. **Admin Account Management**: Ability to create additional admin accounts and manage them effectively.
+
+8. **Simplified Employee Login**: Employees log in using their assigned ID numbers (no passwords required), accessing their schedules and checking in or out as needed.
+
+9. **Link**: https://zoneclocker.netlify.app/ 
+
+9. **Login Admin**: Use 'guest@gmail.com' as email and 'guest' as password.
+
+
+## Demo
+
+![Demo](./client/public/demo/home.png)
+![Demo](./client/public/demo/employees.png)
+![Demo](./client/public/demo/addshift.png)
+![Demo](./client/public/demo/addzone.png)
+![Demo](./client/public/demo/adminaccounts.png)
+![Demo](./client/public/demo/employeeview.png)
