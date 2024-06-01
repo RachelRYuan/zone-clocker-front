@@ -13,10 +13,10 @@ import { CreateAccount } from "./pages/auth/CreateAccount";
 import AuthProvider, { AuthContext } from "./context/AuthContext";
 import EmployeePage from "./pages/employeePage/EmployeePage";
 
-const ProtectedRoute: React.FC<{ children: ReactNode; allowedRoles: string[] }> = ({
-  children,
-  allowedRoles,
-}) => {
+const ProtectedRoute: React.FC<{
+  children: ReactNode;
+  allowedRoles: string[];
+}> = ({ children, allowedRoles }) => {
   const authContext = useContext(AuthContext);
 
   if (!authContext) {
