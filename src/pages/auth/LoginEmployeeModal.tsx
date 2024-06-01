@@ -78,7 +78,9 @@ export default function LoginEmployeeModal() {
           {(onClose) => (
             <>
               <form onSubmit={handleSubmitEmployee}>
-                <ModalHeader className="flex flex-col gap-1">Employee log in</ModalHeader>
+                <ModalHeader className="flex flex-col gap-1">
+                  Employee log in
+                </ModalHeader>
                 <ModalBody>
                   <Input
                     endContent={
@@ -108,7 +110,11 @@ export default function LoginEmployeeModal() {
                       >
                         Close
                       </Button>
-                      <Button color="primary" type="submit" className="bg-orange-600">
+                      <Button
+                        color="primary"
+                        type="submit"
+                        className="bg-orange-600"
+                      >
                         Log in
                       </Button>
                     </div>

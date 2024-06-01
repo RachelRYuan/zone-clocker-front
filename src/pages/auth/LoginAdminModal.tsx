@@ -18,12 +18,13 @@ import { AxiosError } from "axios";
 export default function LoginAdminModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const [formDataAdmin, setFormDataAdmin] = useState<{ email: string; password: string }>(
-    {
-      email: "",
-      password: "",
-    }
-  );
+  const [formDataAdmin, setFormDataAdmin] = useState<{
+    email: string;
+    password: string;
+  }>({
+    email: "",
+    password: "",
+  });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -85,11 +86,13 @@ export default function LoginAdminModal() {
           {(onClose) => (
             <>
               <form onSubmit={handleSubmit}>
-                <ModalHeader className="flex flex-col gap-1">Admin log in</ModalHeader>
+                <ModalHeader className="flex flex-col gap-1">
+                  Admin log in
+                </ModalHeader>
                 <ModalBody>
                   <p className="text-xs mt-[-21px]">
-                    Are you a curious guest? Use 'guest@gmail.com' as email and 'guest' as
-                    password
+                    Are you a curious guest? Use 'guest@gmail.com' as email and
+                    'guest' as password
                   </p>
                   <Input
                     autoFocus
@@ -135,7 +138,11 @@ export default function LoginAdminModal() {
                       >
                         Close
                       </Button>
-                      <Button color="primary" type="submit" className="bg-orange-600">
+                      <Button
+                        color="primary"
+                        type="submit"
+                        className="bg-orange-600"
+                      >
                         Sign in
                       </Button>
                     </div>

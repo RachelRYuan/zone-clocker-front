@@ -7,13 +7,21 @@ import { useAccount } from "./useAccount";
 export const ModalCreateAccount: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const { nameError, emailError, submitCreateAdmin, handleInputChange, localFormInputs } =
-    useAccount();
+  const {
+    nameError,
+    emailError,
+    submitCreateAdmin,
+    handleInputChange,
+    localFormInputs,
+  } = useAccount();
 
   const modalRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const handleClickOutside = (event: Event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
         dispatch(toggleModal());
         dispatch(resetState());
       }
@@ -79,7 +87,9 @@ export const ModalCreateAccount: React.FC = () => {
                 />
               </div>
               {nameError && (
-                <p className="text-xs text-right text-red-500 my-1">{nameError}</p>
+                <p className="text-xs text-right text-red-500 my-1">
+                  {nameError}
+                </p>
               )}
               <div className="mb-2 flex flex-col items-start">
                 <label
@@ -97,7 +107,9 @@ export const ModalCreateAccount: React.FC = () => {
                   required
                 />
                 {emailError && (
-                  <p className="text-xs text-right text-red-500 my-1">{emailError}</p>
+                  <p className="text-xs text-right text-red-500 my-1">
+                    {emailError}
+                  </p>
                 )}
               </div>
               <div className="mb-2 flex flex-col items-start">

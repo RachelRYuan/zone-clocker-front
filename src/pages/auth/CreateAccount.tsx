@@ -38,13 +38,16 @@ export function CreateAccount() {
     e.preventDefault();
 
     try {
-      await axios.post("https://zone-clocker-back.onrender.com/api/auth/create-account", {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        company_email: formData.company_email,
-        company_name: formData.company_name,
-      });
+      await axios.post(
+        "https://zone-clocker-back.onrender.com/api/auth/create-account",
+        {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          company_email: formData.company_email,
+          company_name: formData.company_name,
+        }
+      );
       navigate("/home");
       setFormData({
         email: "",
@@ -173,12 +176,18 @@ export function CreateAccount() {
                     >
                       Close
                     </Button>
-                    <Button color="primary" type="submit" className="bg-orange-600">
+                    <Button
+                      color="primary"
+                      type="submit"
+                      className="bg-orange-600"
+                    >
                       Create account
                     </Button>
                   </div>
                   {errorMessage && (
-                    <p className="text-red-500 text-right mt-2 text-sm">{errorMessage}</p>
+                    <p className="text-red-500 text-right mt-2 text-sm">
+                      {errorMessage}
+                    </p>
                   )}
                 </div>
               </ModalFooter>

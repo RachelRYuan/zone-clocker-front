@@ -1,6 +1,9 @@
 import { makeRequest } from "../../../axios";
 import { useDispatch, useSelector } from "react-redux";
-import { resetIdZoneToDelete, toggleModal } from "../../../slices/zones/modalSlice";
+import {
+  resetIdZoneToDelete,
+  toggleModal,
+} from "../../../slices/zones/modalSlice";
 import {
   setSelectedCoordinates,
   setFormInputs,
@@ -56,7 +59,9 @@ export const useAddZone = () => {
   const [nameError, setNameError] = useState<string | null>(null);
 
   const updateZone = async () => {
-    if (!isValidNewZone(name, selectedCoordinates?.lat, selectedCoordinates?.lng))
+    if (
+      !isValidNewZone(name, selectedCoordinates?.lat, selectedCoordinates?.lng)
+    )
       throw new Error("Invalid data provided for adding zone.");
 
     await makeRequest.put("/zone/update-zone", {
@@ -71,7 +76,9 @@ export const useAddZone = () => {
   };
 
   const createNewZone = async () => {
-    if (!isValidNewZone(name, selectedCoordinates?.lat, selectedCoordinates?.lng))
+    if (
+      !isValidNewZone(name, selectedCoordinates?.lat, selectedCoordinates?.lng)
+    )
       throw new Error("Invalid data provided for adding zone.");
 
     await makeRequest.post("/zone/add-zone", {
