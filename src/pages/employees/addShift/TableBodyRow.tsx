@@ -3,7 +3,10 @@ import { MdOutlineModeEditOutline, MdDeleteForever } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchShifts, setShift } from "../../../slices/shift/shiftSlice";
 import { AppDispatch, RootState } from "../../../store/store";
-import { toggleModal, toggleModalDelete } from "../../../slices/shift/shiftSlice";
+import {
+  toggleModal,
+  toggleModalDelete,
+} from "../../../slices/shift/shiftSlice";
 import { useEffect } from "react";
 import { useAuth } from "../../../context/useAuth";
 import { useShiftEmployee } from "./useShiftEmployee";
@@ -90,7 +93,8 @@ export default function TableBodyRow({
                   <>
                     <div className="flex flex-row">
                       <p className="mb-1">
-                        Schedule: {`${shiftForDay.start_time} to ${shiftForDay.end_time}`}
+                        Schedule:{" "}
+                        {`${shiftForDay.start_time} to ${shiftForDay.end_time}`}
                       </p>
                       {currentUser?.userType === "admin" && (
                         <div className="flex flex-row">
@@ -126,12 +130,16 @@ export default function TableBodyRow({
                       <div className="flex flex-col items-start justify">
                         <p className="mb-1">
                           Checked in:{" "}
-                          {shiftForDay.check_in ? shiftForDay.check_in : "Not yet"}{" "}
+                          {shiftForDay.check_in
+                            ? shiftForDay.check_in
+                            : "Not yet"}{" "}
                           {shiftForDay.check_in_date}
                         </p>
                         <p className="mb-1">
                           Checked out:{" "}
-                          {shiftForDay.check_out ? shiftForDay.check_out : "Not yet"}{" "}
+                          {shiftForDay.check_out
+                            ? shiftForDay.check_out
+                            : "Not yet"}{" "}
                           {shiftForDay.check_out_date}
                         </p>
                       </div>
@@ -247,7 +255,9 @@ export default function TableBodyRow({
                       {/* Reset Check in adn Check out */}
                       <div
                         onClick={() => {
-                          if (activeShiftForCheckOutModal !== shiftForDay.id_shift) {
+                          if (
+                            activeShiftForCheckOutModal !== shiftForDay.id_shift
+                          ) {
                             openCheckOutModalForShift(shiftForDay.id_shift!);
                           } else {
                             closeCheckOutModalForShift();
@@ -255,10 +265,10 @@ export default function TableBodyRow({
                         }}
                         className="mt-2 p-1 text-center border-2 border-dashed bg-slate-200 cursor-pointer"
                       >
-                        {activeShiftForCheckOutModal !== shiftForDay.id_shift && (
-                          <p>Reset Check out</p>
-                        )}
-                        {activeShiftForCheckOutModal === shiftForDay.id_shift && (
+                        {activeShiftForCheckOutModal !==
+                          shiftForDay.id_shift && <p>Reset Check out</p>}
+                        {activeShiftForCheckOutModal ===
+                          shiftForDay.id_shift && (
                           <div>
                             <p>Are you sure?</p>
                             <div className="flex gap-2 items-center justify-center">

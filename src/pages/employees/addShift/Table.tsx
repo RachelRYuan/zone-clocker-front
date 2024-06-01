@@ -24,7 +24,11 @@ interface Employee {
   mobile_number: string | null;
 }
 
-const Table: React.FC<Props> = ({ endDate, startDate, filteredEmployeeList }) => {
+const Table: React.FC<Props> = ({
+  endDate,
+  startDate,
+  filteredEmployeeList,
+}) => {
   const dispatch: AppDispatch = useDispatch();
 
   const { employeeList } = useSelector((state: RootState) => state.employee);

@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store/store";
-import { resetStateShift, setShift, toggleModal } from "../../../slices/shift/shiftSlice";
+import {
+  resetStateShift,
+  setShift,
+  toggleModal,
+} from "../../../slices/shift/shiftSlice";
 import { useShift } from "./useShift";
 
 export const ShiftModal: React.FC = () => {
@@ -23,7 +27,10 @@ export const ShiftModal: React.FC = () => {
   const modalRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const handleClickOutside = (event: Event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
         dispatch(toggleModal());
         dispatch(resetStateShift());
       }
