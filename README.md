@@ -36,9 +36,9 @@ Zone Clocker full-stack application designed to streamline employee schedule man
 
 ## Demo
 
-![Demo](./client/public/demo/home.png)
-![Demo](./client/public/demo/employees.png)
-![Demo](./client/public/demo/addshift.png)
-![Demo](./client/public/demo/addzone.png)
-![Demo](./client/public/demo/adminaccounts.png)
-![Demo](./client/public/demo/employeeview.png)
+![Demo](public/demo/home.png)
+![Demo](public/demo/employees.png)
+![Demo](public/demo/addshift.png)
+![Demo](public/demo/addzone.png)
+![Demo](public/demo/adminaccounts.png)
+![Demo](public/demo/employeeview.png)

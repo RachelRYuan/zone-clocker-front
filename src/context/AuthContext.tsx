@@ -1,7 +1,9 @@
 import { createContext, useState, useEffect, ReactNode } from "react";
 import { makeRequest } from "../axios";
 
-export const AuthContext = createContext<AuthContextProps | undefined>(undefined);
+export const AuthContext = createContext<AuthContextProps | undefined>(
+  undefined
+);
 
 interface User {
   id: number;
